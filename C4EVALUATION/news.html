@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <style>
+         a{
+            text-decoration: none;
+            color: black;
+        }
+        #container{
+            display:flex
+        }
+        #main{
+            
+                margin-left: 200px
+            
+        }
+        h1{
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar"></div>
+        <div id="main"></div>
+    </div>
+</body>
+</html>
+<script type="module">
+     import navbar from "./components/sidebar.js";
+    var mysidebar= navbar();
+    document.getElementById("sidebar").innerHTML=mysidebar
+
+    let input=document.getElementById("search_box")
+    input.addEventListener("keypress",(e)=>{
+       
+        if(e.key=='Enter'){
+           let input_val=input.value
+           localStorage.setItem('search_term',(input_val))
+           window.location.href="search.html"
+        }
+    })
+
+   var mydata=JSON.parse(localStorage.getItem("article"))
+  var data=[]
+   data.push(mydata)
+   console.log(data)
+   function render(data){
+        data.forEach(function cards(elem){
+            var div=document.createElement("div")
+            var mytitle=document.createElement("h2")
+            mytitle.textContent=elem.title
+            var description=document.createElement("p")
+            var content=document.createElement("p")
+            content.textContent=elem.content
+            description.textContent=elem.description
+            var image=document.createElement("img")
+            image.src=elem.urlToImage
+             div.append(mytitle,description,image,content)
+             document.getElementById("main").append(div)
+              
+        })
+       
+    }
+    render(data)
+
+</script>

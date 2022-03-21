@@ -27,7 +27,7 @@ const Register=async(req,res)=>{
 const Login=async(req,res)=>{
     try {
         //check if email exists already
-        let user= await User.findOne({email:req.body.email}).lean().exec()
+        let user= await User.findOne({email:req.body.email}).exec()
         if(!user){
             return res.status(400).send({message:"Email or password incorrect"})
         }

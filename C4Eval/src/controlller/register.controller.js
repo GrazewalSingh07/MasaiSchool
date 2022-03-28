@@ -6,7 +6,7 @@ const newToken=(user)=>{
     return jwt.sign({user},"C4EVAL")
 }
 
-router.post("/",async(req,res)=>{
+router.post("/", async(req,res)=>{
     try {
         
         let user= await User.findOne({email:req.body.email}).lean().exec()

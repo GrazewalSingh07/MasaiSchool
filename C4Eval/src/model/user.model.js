@@ -12,7 +12,7 @@ password :{type:String, required:true},
 })
 
 userSchema.pre("save",function (next){
-    const hash = bcrypt.hashSync(req.body.password, 8);
+    const hash = bcrypt.hashSync(this.password, 8);
     this.password= hash;
     return next()
 })
